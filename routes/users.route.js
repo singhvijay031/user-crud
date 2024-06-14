@@ -42,18 +42,27 @@ router.patch("/:id", (req, res) => {
 });
 
 //Delete users here
+// router.delete("/:id", (req, res) => {
+//   const userId = req.params.id;
+//   let indexToDelete = mockData.findIndex((item) => {
+//     return item.id === userId;
+//   });
+//   const deletedValue = mockData.splice(indexToDelete, 1);
+
+//   res.json({
+//     message: "User Deleted",
+//     data: deletedValue,
+//   });
+//   console.log(indexToDelete);
+// });
+
 router.delete("/:id", (req, res) => {
   const userId = req.params.id;
-  let indexToDelete = mockData.findIndex((item) => {
-    return item.id === userId;
+  const filteredData = mockData.filter((item) => {
+    return item.id !== userId;
   });
-  const deletedValue = mockData.splice(indexToDelete, 1);
-
-  res.json({
-    message: "User Deleted",
-    data: deletedValue,
-  });
-  console.log(indexToDelete);
+  mockData = filteredData;
+  res.send("User Deleted");
 });
 
 module.exports = router;
